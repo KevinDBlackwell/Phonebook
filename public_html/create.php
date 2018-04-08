@@ -23,6 +23,7 @@
             
             $statement = $connection->prepare($sql);
             $statement->execute($new_number);
+            header("Location: view.php");
         } 
         
         catch(PDOException $error) {

@@ -7,6 +7,11 @@
         try {
             $connection = new PDO($dsn, $username, $password, $options);
             
+            $currentfn = $_GET['firstname'];
+            $currentln = $_GET['lastname'];
+            $currente = $_GET['email'];
+            $currentpn = $_GET['phonenumber'];
+            
             $id = $_GET['id'];
 
             $firstname = $_POST['firstname'];
@@ -22,7 +27,7 @@
             
             $statement = $connection->prepare($sql);
             $statement->execute($updated_number);
-            header("Location: index.php");
+            header("Location: view.php");
         } 
         
         catch(PDOException $error) {

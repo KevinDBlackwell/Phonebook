@@ -13,7 +13,7 @@
 
         $statement = $connection->prepare($sql);
         $statement->execute($deleted_number);
-        header("Location: index.php");
+        header("Location: view.php");
     }
 
     catch(PDOException $error) {
