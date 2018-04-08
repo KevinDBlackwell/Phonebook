@@ -28,7 +28,7 @@
     <table class="table table-striped table-dark">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col"></th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Email Address</th>
@@ -41,13 +41,13 @@
         <tbody>
             <?php foreach ($result as $row) { ?>
                 <tr>
-                    <th scope="row"><?php echo escape($row["id"]); ?></td>
+                    <th scope="row"></th>
                     <td><?php echo escape($row["firstname"]); ?></td>
                     <td><?php echo escape($row["lastname"]); ?></td>
                     <td><?php echo escape($row["email"]); ?></td>
                     <td><?php echo escape($row["phonenumber"]); ?></td>
                     <td><?php echo escape($row["date"]); ?> </td>
-                    <td>
+                    <td style="letter-spacing: 20px;">
                         <a href="update.php?id=<?php echo escape($row["id"]); ?>'">
                             <i class="fas fa-pencil-alt"></i>
                         </a> 
