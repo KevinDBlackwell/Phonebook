@@ -47,7 +47,14 @@
                     <td><?php echo escape($row["email"]); ?></td>
                     <td><?php echo escape($row["phonenumber"]); ?></td>
                     <td><?php echo escape($row["date"]); ?> </td>
-                    <td><a href="update.php?id=<?php echo escape($row["id"]); ?>'">Update</a> <a href="delete.php?id=<?php echo escape($row["id"]); ?>'">Delete</a></td>
+                    <td>
+                        <a href="update.php?id=<?php echo escape($row["id"]); ?>'">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a> 
+                        <a href="delete.php?id=<?php echo escape($row["id"]); ?>'">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             <?php } ?> 
         </tbody>
