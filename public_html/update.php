@@ -7,38 +7,34 @@
         try {
             $connection = new PDO($dsn, $username, $password, $options);
             
-            $new_number = array(
-                "firstname" => $_POST['firstname'],
-                "lastname" => $_POST['lastname'],
-                "email" => $_POST['email'],
-                "phonenumber" => $_POST['phonenumber'],
-            );
+            $id = $_GET['id'];
 
-            $sql = sprintf(
-                "INSERT INTO %s (%s) values (%s)",
-                "people",
-                implode(", ", array_keys($new_number)),
-                ":" . implode(", :", array_keys($new_number))
-            );
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $email = $_POST['email'];
+            $phonenumber = $_POST['phonenumber'];
+        
+            $updated_number = array($firstname, $lastname, $email, $phonenumber, $id);
+
+            $sql = 'UPDATE people
+            SET firstname = ?, lastname = ?, email = ?, phonenumber = ? 
+            WHERE id = ?';
             
             $statement = $connection->prepare($sql);
-            $statement->execute($new_number);
+            $statement->execute($updated_number);
+            header("Location: index.php");
         } 
         
         catch(PDOException $error) {
             echo $sql . "<br>" . $error->getMessage();
         }
     }
-?>
 
+?>
 
 <?php include "../resources/templates/header.php" ?>
 
-<?php if (isset($_POST['submit']) && $statement) { ?>
-	<blockquote><?php echo $_POST['firstname']; ?> successfully added.</blockquote>
-<?php } ?>
-
-<h2 class="display-3 text-center mb-5">Add a Phone Number</h2>
+<h2 class="display-3 text-center mb-5">Change a Phone Number</h2>
 
 <form class="w-50 mx-auto" method="post">
     <div class="form-group">

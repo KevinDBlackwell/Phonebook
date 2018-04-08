@@ -1,10 +1,8 @@
 <?php include "../resources/templates/header.php" ?>
 
-	<h1>Phonebook</h1>
+	<h1 class="display-1 text-center mb-4">Phonebook</h1>
 
-	<ul>
-		<li><a href="create.php">Create</a> - Add a number</li>
-		<li><a href="view.php">View</a> - Find a number</li>
-	</ul>
+	<a class="btn btn-secondary d-block w-25 mx-auto mb-4" href="create.php">Create</a>
+	<a class="btn btn-secondary d-block w-25 mx-auto mb-4" href="view.php">View</a>
 
 <?php include "../resources/templates/footer.php" ?>
