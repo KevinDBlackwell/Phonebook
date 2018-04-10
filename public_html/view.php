@@ -65,7 +65,7 @@
     <?php } 
 
 ?> 
-    <a class="btn btn-secondary d-block w-25 mx-auto" href="create.php">Add a new number</a>
+    <a class="btn btn-secondary d-block w-25 mx-auto mb-4" href="create.php">Add a new number</a>
     <a class="btn btn-secondary d-block w-25 mx-auto" href="index.php">Back to home</a>
 
 
