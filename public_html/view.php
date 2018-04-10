@@ -33,7 +33,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email Address</th>
                 <th scope="col">Phone Number</th>
-                <th scope="col">Date Added</th>
+                <!-- <th scope="col">Date Added</th> -->
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -46,7 +46,7 @@
                     <td><?php echo escape($row["lastname"]); ?></td>
                     <td><?php echo escape($row["email"]); ?></td>
                     <td><?php echo escape($row["phonenumber"]); ?></td>
-                    <td><?php echo escape($row["date"]); ?> </td>
+                    <!-- <td><?php echo escape($row["date"]); ?> </td> -->
                     <td style="letter-spacing: 20px;">
                         <a href="update.php?id=<?php echo escape($row["id"]); ?>'">
                             <i class="fas fa-pencil-alt"></i>
