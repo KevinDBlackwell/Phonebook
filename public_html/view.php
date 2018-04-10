@@ -23,7 +23,7 @@
 <?php require "../resources/templates/header.php" ?>
 		
 <?php if ($result && $statement->rowCount() > 0) { ?>
-    <h2 class="display-2 text-center">Contacts</h2>
+    <h2 class="display-2 text-center mb-4">Contacts</h2>
 
     <table class="table table-striped table-dark">
         <thead>
