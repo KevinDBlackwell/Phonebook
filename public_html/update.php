@@ -52,11 +52,11 @@
     </div>
     <div class="form-group">
 	    <label for="email">Email Address</label>
-	    <input class="form-control" type="text" name="email" id="email" placeholder="name@example.com">
+	    <input class="form-control" type="email" name="email" id="email" placeholder="name@example.com">
     </div>
     <div class="form-group">
 	    <label for="phonenumber">Phone Number</label>
-	    <input class="form-control" type="text" name="phonenumber" id="phonenumber" placeholder="xxx-xxx-xxxx">
+	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" placeholder="xxx-xxx-xxxx">
     </div>
     <div class="form-group">
     	<input class="btn btn-dark" type="submit" name="submit" value="Submit">
