@@ -4,30 +4,36 @@
         require "../resources/config.php";
         require "../resources/common.php";
 
-        try {
-            $connection = new PDO($dsn, $username, $password, $options);
-            
-            $new_number = array(
-                "firstname" => $_POST['firstname'],
-                "lastname" => $_POST['lastname'],
-                "email" => $_POST['email'],
-                "phonenumber" => $_POST['phonenumber'],
-            );
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $phonenumber = $_POST['phonenumber'];
 
-            $sql = sprintf(
-                "INSERT INTO %s (%s) values (%s)",
-                "people",
-                implode(", ", array_keys($new_number)),
-                ":" . implode(", :", array_keys($new_number))
-            );
-            
-            $statement = $connection->prepare($sql);
-            $statement->execute($new_number);
-            header("Location: view.php");
-        } 
-        
-        catch(PDOException $error) {
-            echo $sql . "<br>" . $error->getMessage();
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if(preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phonenumber)) {
+                try {
+                    $connection = new PDO($dsn, $username, $password, $options);
+
+                    $new_number = array($firstname, $lastname, $email, $phonenumber);
+
+                    $sql = "INSERT INTO people (firstname, lastname, email, phonenumber) VALUES (?, ?, ?, ?)";
+
+                    $statement = $connection->prepare($sql);
+
+                    $statement->execute($new_number);
+
+                    header("Location: view.php");
+                }
+                catch(PDOException $error) {
+                    echo $sql . "<br><br>" . $error->getMessage();
+                }
+            }
+            else {
+                echo "<script type='text/javascript'>alert('Enter your phone number in the correct format: xxx-xxx-xxxx');</script>";
+            }
+        }
+        else {
+            echo "<script type='text/javascript'>alert('Re-enter your email!');</script>";
         }
     }
 ?>
@@ -35,28 +41,24 @@
 
 <?php include "../resources/templates/header.php" ?>
 
-<?php if (isset($_POST['submit']) && $statement) { ?>
-	<blockquote><?php echo $_POST['firstname']; ?> successfully added.</blockquote>
-<?php } ?>
-
 <h2 class="display-3 text-center mb-5">Add a Phone Number</h2>
 
 <form class="w-50 mx-auto" method="post">
     <div class="form-group">
 	    <label for="firstname">First Name</label>
-	    <input class="form-control" type="text" name="firstname" id="firstname" placeholder="First Name">
+	    <input class="form-control" type="text" name="firstname" id="firstname" placeholder="First Name" required>
     </div>
     <div class="form-group">
 	    <label for="lastname">Last Name</label>
-	    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name">
+	    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" required>
     </div>
     <div class="form-group">
 	    <label for="email">Email Address</label>
-	    <input class="form-control" type="email" name="email" id="email" placeholder="name@example.com">
+	    <input class="form-control" type="email" name="email" id="email" placeholder="name@example.com" required>
     </div>
     <div class="form-group">
 	    <label for="phonenumber">Phone Number</label>
-	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" placeholder="xxx-xxx-xxxx">
+	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" placeholder="xxx-xxx-xxxx" required>
     </div>
     <div class="form-group">
     	<input class="btn btn-dark" type="submit" name="submit" value="Submit">
