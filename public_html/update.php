@@ -40,9 +40,7 @@
         
             $updated_number = array($firstname, $lastname, $email, $phonenumber, $id);
 
-            $sql = 'UPDATE people
-            SET firstname = ?, lastname = ?, email = ?, phonenumber = ? 
-            WHERE id = ?';
+            $sql = 'UPDATE people SET firstname = ?, lastname = ?, email = ?, phonenumber = ? WHERE id = ?';
             
             $statement = $connection->prepare($sql);
             $statement->execute($updated_number);
