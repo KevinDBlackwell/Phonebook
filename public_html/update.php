@@ -28,39 +28,29 @@
         require "../resources/config.php";
         require "../resources/common.php";
 
-            $id = $_GET['id'];
+        $id = $_GET['id'];
 
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $email = $_POST['email'];
-            $phonenumber = $_POST['phonenumber'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $phonenumber = $_POST['phonenumber'];
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            if(preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phonenumber)) {
-                try {
-                    $connection = new PDO($dsn, $username, $password, $options);
-                
-                    $updated_number = array($firstname, $lastname, $email, $phonenumber, $id);
+        try {
+            $connection = new PDO($dsn, $username, $password, $options);
         
-                    $sql = 'UPDATE people
-                    SET firstname = ?, lastname = ?, email = ?, phonenumber = ? 
-                    WHERE id = ?';
-                    
-                    $statement = $connection->prepare($sql);
-                    $statement->execute($updated_number);
-                    header("Location: view.php");
-                } 
-                
-                catch(PDOException $error) {
-                    echo $sql . "<br>" . $error->getMessage();
-                }
-            }
-            else {
-                echo "<script type='text/javascript'>alert('Enter your phone number in the correct format: xxx-xxx-xxxx');</script>";
-            }
-        }
-        else {
-            echo "<script type='text/javascript'>alert('Re-enter your email!');</script>";
+            $updated_number = array($firstname, $lastname, $email, $phonenumber, $id);
+
+            $sql = 'UPDATE people
+            SET firstname = ?, lastname = ?, email = ?, phonenumber = ? 
+            WHERE id = ?';
+            
+            $statement = $connection->prepare($sql);
+            $statement->execute($updated_number);
+            header("Location: view.php");
+        } 
+        
+        catch(PDOException $error) {
+            echo $sql . "<br>" . $error->getMessage();
         }
     }
 
@@ -82,11 +72,11 @@
     </div>
     <div class="form-group">
 	    <label for="email">Email Address</label>
-	    <input class="form-control" type="email" name="email" id="email" value="<?php echo ($result['email']); ?>" required>
+	    <input class="form-control" type="email" name="email" id="email" value="<?php echo ($result['email']); ?>" title="Make sure your email includes an '@' and a '.'!" required pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
     </div>
     <div class="form-group">
 	    <label for="phonenumber">Phone Number</label>
-	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" value="<?php echo ($result['phonenumber']); ?>" required>
+	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" value="<?php echo ($result['phonenumber']); ?>" title="Make sure your phone number has this format: xxx-xxx-xxxx" required pattern="[0-9]{3}[-][0-9]{3}[-][0-9]{4}">
     </div>
     <div class="form-group">
     	<input class="btn btn-dark" type="submit" name="submit" value="Submit">

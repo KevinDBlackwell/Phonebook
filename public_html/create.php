@@ -9,32 +9,23 @@
         $email = $_POST['email'];
         $phonenumber = $_POST['phonenumber'];
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            if(preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phonenumber)) {
-                try {
-                    $connection = new PDO($dsn, $username, $password, $options);
+        try {
+            $connection = new PDO($dsn, $username, $password, $options);
 
-                    $new_number = array($firstname, $lastname, $email, $phonenumber);
+            $new_number = array($firstname, $lastname, $email, $phonenumber);
 
-                    $sql = "INSERT INTO people (firstname, lastname, email, phonenumber) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO people (firstname, lastname, email, phonenumber) VALUES (?, ?, ?, ?)";
 
-                    $statement = $connection->prepare($sql);
+            $statement = $connection->prepare($sql);
 
-                    $statement->execute($new_number);
+            $statement->execute($new_number);
 
-                    header("Location: view.php");
-                }
-                catch(PDOException $error) {
-                    echo $sql . "<br><br>" . $error->getMessage();
-                }
-            }
-            else {
-                echo "<script type='text/javascript'>alert('Enter your phone number in the correct format: xxx-xxx-xxxx');</script>";
-            }
+            header("Location: view.php");
         }
-        else {
-            echo "<script type='text/javascript'>alert('Re-enter your email!');</script>";
+        catch(PDOException $error) {
+            echo $sql . "<br><br>" . $error->getMessage();
         }
+            
     }
 ?>
 
@@ -54,11 +45,11 @@
     </div>
     <div class="form-group">
 	    <label for="email">Email Address</label>
-	    <input class="form-control" type="email" name="email" id="email" placeholder="name@example.com" required>
+	    <input class="form-control" type="email" name="email" id="email" placeholder="name@example.com" title="Make sure your email includes an '@' and a '.'" required pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
     </div>
     <div class="form-group">
 	    <label for="phonenumber">Phone Number</label>
-	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" placeholder="xxx-xxx-xxxx" required>
+	    <input class="form-control" type="tel" name="phonenumber" id="phonenumber" placeholder="xxx-xxx-xxxx" title="Make sure your phone number has this format: xxx-xxx-xxxx" required pattern="[0-9]{3}[-][0-9]{3}[-][0-9]{4}">
     </div>
     <div class="form-group">
     	<input class="btn btn-dark" type="submit" name="submit" value="Submit">
