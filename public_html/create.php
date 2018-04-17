@@ -34,11 +34,11 @@
 <form class="w-50 mx-auto" method="post">
     <div class="form-group">
 	    <label for="firstname">First Name</label>
-	    <input class="form-control" type="text" name="firstname" id="firstname" placeholder="First Name" title="Only characters A-Z allowed!" required pattern="[a-zA-Z]">
+	    <input class="form-control" type="text" name="firstname" id="firstname" placeholder="First Name" title="Only characters A-Z allowed!" required pattern="([a-zA-Z]+)">
     </div>
     <div class="form-group">
 	    <label for="lastname">Last Name</label>
-	    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" title="Only characters A-Z allowed!" required pattern="[a-zA-Z]">
+	    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" title="Only characters A-Z allowed!" required pattern="([a-zA-Z]+)">
     </div>
     <div class="form-group">
 	    <label for="email">Email Address</label>
