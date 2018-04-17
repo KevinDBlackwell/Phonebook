@@ -2,7 +2,6 @@
 
     if (isset($_POST['submit'])) {
         require "../resources/config.php";
-        require "../resources/common.php";
 
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];

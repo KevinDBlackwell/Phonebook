@@ -26,7 +26,6 @@
 
     if (isset($_POST['submit'])) {
         require "../resources/config.php";
-        require "../resources/common.php";
 
         $id = $_GET['id'];
 
